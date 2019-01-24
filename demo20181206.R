@@ -1,0 +1,16 @@
+data(mtcars)
+mtcars$trans <- factor(c("auto","stick")[mtcars$am+1])
+fitMPG <- lm(mpg~hp*trans,data=mtcars)
+summary(fitMPG)
+AIC(fitMPG)
+fitMPGred <- step(fitMPG)
+summary(fitMPGred)
+AIC(fitMPGred)
+anova(fitMPG,fitMPGred)
+
+admissions <- read.csv("https://stats.idre.ucla.edu/stat/data/binary.csv")
+head(admissions)
+summary(admissions)
+pairs(admissions) # pairs plot
+fitAdmit <- glm(admit~gpa,data=admissions,family="binomial")
+summary(fitAdmit)
