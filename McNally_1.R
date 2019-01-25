@@ -439,6 +439,70 @@ View(mean.vent.d2s.ion)
 # Ion channel D2 boxplot
 boxplot(mean.vent.d2wt.ion[,23],mean.vent.d2wt.ion[,24],mean.vent.d2s.ion[,22],mean.vent.d2s.ion[,23], main = "D2 Ion Channel", names=c("LV WT","RV WT","LV KO","RV KO"),col= c("darkred","blue"))
 
+
+
+#SLN Boxplot
+
+ncol(mean.vent.129wt.ion)
+ncol(mean.vent.129s.ion)
+ncol(mean.vent.d2s.ion)
+
+sln.129wt <-subset(m129WT_LvVsRV.htseq.edgeR, gene == "Sln" )
+sln.129s<-subset(m129KO_LvVsRV.htseq.edgeR, gene == "Sln" )
+sln.D2wt<-subset(mD2WT_LvVsRV.htseq.edgeR, gene == "Sln" )
+sln.D2s<-subset(mD2KO_LvVsRV.htseq.edgeR, gene == "Sln" )
+
+
+
+sln.129wt.mean <-rowMeans(sln.129wt[,7:8])
+sln.129wt.mean<- cbind(sln.129wt, sln.129wt.mean)  #how to add a list to a column
+sln.129wt.mean.r<-rowMeans(sln.129wt[,9:10])
+sln.129wt.mean<- cbind(sln.129wt.mean,sln.129wt.mean.r)
+View(sln.129wt.mean)
+
+sln.129s.mean <-rowMeans(sln.129s[,7:9])
+sln.129s.mean<- cbind(sln.129s, sln.129s.mean)  #how to add a list to a column
+sln.129s.mean.r<-rowMeans(sln.129s[,10:12])
+sln.129s.mean<- cbind(sln.129s.mean,sln.129s.mean.r)
+View(sln.129s.mean)
+
+sln.d2s.mean <-rowMeans(sln.D2s[,7:8])
+sln.d2s.mean<- cbind(sln.D2s, sln.d2s.mean)  #how to add a list to a column
+sln.d2s.mean.r<-rowMeans(sln.d2s.mean[,9:11])
+sln.d2s.mean<- cbind(sln.d2s.mean,sln.d2s.mean.r)
+View(sln.d2s.mean)
+
+
+
+se.129wt.lv.sln<- (sd(sln.129wt.mean[1,7:8]))/(sqrt(2))
+
+se.129wt.rv.sln<- (sd(sln.129wt.mean[1,9:10]))/(sqrt(2))
+
+
+#Barplot SLN Error Bars
+se.129s.lv.sln<- (sd(sln.129s.mean[1,7:9]))/(sqrt(3))
+se.129s.rv.sln<- (sd(sln.129s.mean[1,10:12]))/(sqrt(3))
+
+
+
+se.d2s.lv.sln<-(sd(sln.d2s.mean[1,7:8]))/(sqrt(2))
+
+se.d2s.rv.sln<-(sd(sln.d2s.mean[1,9:11]))/(sqrt(3))
+
+
+
+means.sln.tot <- c(7.485621,33.86022, 1.42014, 3.825057, 0, 0, 2.418132,4.479117)
+names.sln.tot <- c("129 LV WT","129 RV WT","129 LV KO","129 RV KO","D2 LV WT","D2 RV WT","D2 LV KO","D2 RV KO")
+standardErrors.sln<- c(se.129wt.lv.sln,se.129wt.rv.sln,se.129s.lv.sln,se.129s.rv.sln,0,0, se.d2s.lv.sln, se.d2s.rv.sln)
+
+plotTop <- max(means.ang.tot+standardErrors.sln*2)
+sln.bar<- barplot(means.sln.tot, names.arg=names.sln.tot, main = "SLN", xlab = "Tissue type", ylab = "Copies per million (cpm)",col=c("darkred","blue"), las=1, ylim=c(0,plotTop))
+
+
+
+arrows(sln.bar, means.sln.tot + standardErrors.sln, sln.bar, means.sln.tot-standardErrors.sln, lwd=2, angle=90, code=3)
+
+
 #Growth Factors
 
 growthf<-c("Ctgf","Fgf12")
@@ -648,65 +712,26 @@ Mean.right.vent.exp.129wt.meta<-rowMeans(lvrv.129wt.meta[,9:10])
 mean.vent.129wt.meta<-cbind(mean.vent.129wt.meta,Mean.right.vent.exp.129wt.meta)
 
 View(mean.vent.129wt.meta)
-
-
-
-
 lvrv.129s.meta<- subset(m129KO_LvVsRV.htseq.edgeR, gene %in% meta )
-
-
-
 Mean.left.vent.exp.129s.meta<-rowMeans(lvrv.129s.meta[,7:9])
-
-
-
 mean.vent.129s.meta<- cbind(lvrv.129s.meta,Mean.left.vent.exp.129s.meta)  #how to add a list to a column
-
-
 Mean.right.vent.exp.129s.meta<-rowMeans(lvrv.129s.meta[,10:12])
-
-
 mean.vent.129s.meta<-cbind(mean.vent.129s.meta,Mean.right.vent.exp.129s.meta)
-
 View(mean.vent.129s.meta)
 
 #D2 Metabolic genes
 lvrv.d2wt.meta<- subset(mD2WT_LvVsRV.htseq.edgeR, gene %in% meta)
-
-
 Mean.left.vent.exp.d2wt.meta<-rowMeans(lvrv.d2wt.meta[,7:9])
-
-
-
 mean.vent.d2wt.meta<- cbind(lvrv.d2wt.meta,Mean.left.vent.exp.d2wt.meta)  #how to add a list to a column
-
-
 Mean.right.vent.exp.d2wt.meta<-rowMeans(lvrv.d2wt.meta[,10:12])
-
-
 mean.vent.d2wt.meta<-cbind(mean.vent.d2wt.meta,Mean.right.vent.exp.d2wt.meta)
-
 View(mean.vent.d2wt.meta)
-
-
-
 lvrv.d2s.meta<- subset(mD2KO_LvVsRV.htseq.edgeR, gene %in% meta )
-
-
 Mean.left.vent.exp.d2s.meta<-rowMeans(lvrv.d2s.meta[,7:8])
-
-
-
 mean.vent.d2s.meta<- cbind(lvrv.d2s.meta,Mean.left.vent.exp.d2s.meta)  #how to add a list to a column
-
-
 Mean.right.vent.exp.d2s.meta<-rowMeans(lvrv.d2s.meta[,9:11])
-
-
 mean.vent.d2s.meta<-cbind(mean.vent.d2s.meta,Mean.right.vent.exp.d2s.meta)
-
 View(mean.vent.d2s.meta)
-
 #Total Atp2a1 barplot
 
 atp2a1.tot<-c(mean.vent.129wt.meta[1,21],mean.vent.129wt.meta[1,22],mean.vent.129s.meta[1,23],mean.vent.129s.meta[1,24],mean.vent.d2wt.meta[2,23],mean.vent.d2wt.meta[2,24],mean.vent.d2s.meta[2,22],mean.vent.d2s.meta[2,23])
@@ -725,7 +750,7 @@ se.129wt.lv.atpa<- (sd(lvrv.129wt.meta[1,7:8]))/(sqrt(2))
 se.129wt.rv.atpa<- (sd(lvrv.129wt.meta[1,9:10]))/(sqrt(2))
 
 se.129s.lv.atpa<- (sd(lvrv.129s.meta[1,7:9]))/(sqrt(3))
-se.129s.rv.atpa<- (sd(lvrv.129s.meta[1,10:12]))/(sqrt(3))
+se.129s.rv.atpa<- (sd(lvrv.129s.meta[1,10:11]))/(sqrt(2))
 
 se.d2wt.lv.atpa<- (sd(lvrv.d2wt.meta[2,7:9]))/(sqrt(3))
 
@@ -735,8 +760,10 @@ se.d2s.lv.atpa<-(sd(lvrv.d2wt.meta[2,7:8]))/(sqrt(2))
 
 se.d2s.rv.atpa<-(sd(lvrv.d2s.meta[2,9:11]))/(sqrt(3))
 
+mean(c(7.420448,6.130404))
 
-means.atpa.tot <- c(8.646328,18.39475,4.931922,26.69169,7.262388,24.07611,7.365246, 7.006671)
+
+means.atpa.tot <- c(8.646328,18.39475,4.931922,6.775426,7.262388,24.07611,7.365246, 7.006671)
 names.atpa.tot <- c("129 LV WT","129 RV WT","129 LV KO","129 RV KO","D2 LV WT","D2 RV WT","D2 LV KO","D2 RV KO")
 standardErrors.atpa <- c(se.129wt.lv.atpa,se.129wt.rv.atpa,se.129s.lv.atpa,se.129s.rv.atpa,se.d2wt.lv.atpa,se.d2wt.rv.atpa,se.d2s.lv.atpa,se.d2s.rv.atpa)
 plotTop <- max(means.atpa.tot+standardErrors.atpa*2)
@@ -866,7 +893,6 @@ se.d2wt.rv.ang<- (sd(lvrv.d2wt.infl[1,10:12]))/(sqrt(3))
 se.d2s.lv.ang<-(sd(lvrv.d2wt.infl[1,7:8]))/(sqrt(2))
 
 se.d2s.rv.ang<-(sd(lvrv.d2s.infl[1,9:11]))/(sqrt(3))
-
 
 means.ang.tot <- c(36.96996, 50.01708,40.72475,53.33809,10.79351,36.18386,11.468,36.75122)
 names.ang.tot <- c("129 LV WT","129 RV WT","129 LV KO","129 RV KO","D2 LV WT","D2 RV WT","D2 LV KO","D2 RV KO")
@@ -1027,3 +1053,119 @@ heat.129wt<-mean.vent.129wt$gene
 heat.129wt<-cbind(heat.129wt, mean.vent.129wt[,21])
 heat.129wt<-cbind(heat.129wt,mean.vent.129wt[,22])
 write.table(heat.129wt,"~/Desktop/Output folder/heat129wt.txt", append = FALSE, sep = "\t", row.names = FALSE, col.names = TRUE)
+
+
+install.packages("ggplot2")
+install.packages("gridExtra")
+install.packages("plotly")
+
+suppressPackageStartupMessages(library("plotly"))
+
+
+
+
+# Volcano plot
+
+
+wt129lvrv<- m129WT_LvVsRV.htseq.edgeR
+
+
+
+colnames(wt129lvrv)
+dim(wt129lvrv)
+
+wt129lvrv <- wt129lvrv[c("gene", "PValue", "logFC")]
+
+head(wt129lvrv)
+
+wt129lvrv["group"]<-"Not Significant"
+
+
+wt129lvrv[which(wt129lvrv["PValue"] < 0.05 & abs(wt129lvrv["logFC"]) < 1 ),"group"]<- "Significant"
+
+
+wt129lvrv[which(wt129lvrv["PValue"] > 0.05 & abs(wt129lvrv["logFC"]) > 1 ),"group"] <- "Fold Change"
+
+wt129lvrv[which(wt129lvrv["PValue"] < 0.05 & abs(wt129lvrv["logFC"]) > 1 ),"group"] <- "Significant and Fold Change"#sig p value and fold change
+
+top_peaks <- wt129lvrv[with(wt129lvrv, order(logFC, PValue)),][1:5,]
+top_peaks <- rbind(top_peaks, wt129lvrv[with(wt129lvrv, order(-logFC, PValue)),][1:5,])
+
+
+
+# Add gene labels for all of the top genes we found
+# here we are creating an empty list, and filling it with entries for each row in the dataframe
+# each list entry is another list with named items that will be used by Plot.ly
+a <- list()
+for (i in seq_len(nrow(top_peaks))) {
+  m <- top_peaks[i, ]
+  a[[i]] <- list(
+    x = m[["logFC"]],
+    y = -log10(m[["PValue"]]),
+    text = m[["gene"]],
+    xref = "x",
+    yref = "y",
+    showarrow = TRUE,
+    arrowhead = 0.5,
+    ax = 20,
+    ay = -40
+  )
+}
+
+?plot_ly()
+p <- plot_ly(data = wt129lvrv, x = wt129lvrv$logFC, y = -log10(wt129lvrv$PValue), mode = "markers", textyx= gene, color = wt129lvrv$group) %>% 
+  layout(title ="129 WT") %>%
+  layout(annotations = a)
+p
+
+
+#Using Non-Adjusted P Value .15 and > 2 FC
+
+Genotypes = c("*129WT*","*D2WT*","*129KO*","*D2KO*")
+for (t in Genotypes){
+  temp = list.files(pattern=t)
+  for (i in 1:length(temp)){
+    print(i)
+    assign(temp[i], read.delim(temp[i]))
+    ShortedName = substr(temp[i],1,nchar(temp[i])-10) 
+    WorkingName = na.omit(get(temp[i]))
+    FilterUP = subset(WorkingName, adj.p <= .01 & logFC >= 1)
+    FilterUP = FilterUP[order(FilterUP$logFC,decreasing = TRUE),]
+    FilterDOWN = subset(WorkingName, adj.p <= .01 & logFC <= -1)
+    FilterDOWN = FilterDOWN[order(FilterDOWN$logFC,decreasing = TRUE),]
+    #UpName = paste(ShortedName, "UPCANDIDATEGENES.txt", sep = "_")
+    #DownName = paste(ShortedName, "DOWNCANDIDATEGENES.txt", sep = "_")
+    #write.table(FilterUP,UpName,sep="\t",row.names=FALSE)
+    #write.table(FilterDOWN,DownName,sep="\t",row.names=FALSE)
+    Together = rbind(FilterUP,FilterDOWN)
+    #DuplicatedTogether = subset(Together,duplicated(gene) | duplicated(gene, fromLast=TRUE))
+    #SortedDuplicatedTogether = DuplicatedTogether[order(DuplicatedTogether$gene),]
+    TogetherName = paste(ShortedName, "Filtered.txt", sep = "_")
+    TogetherNamePDF = paste(ShortedName, ".pdf", sep = "")
+    write.table(Together,TogetherName,sep="\t",row.names=FALSE)
+    
+    res = WorkingName
+    pdf(TogetherNamePDF)
+    with(res, plot(logFC, -log10(adj.p), pch=20, main=ShortedName, cex=.9))
+    
+    # Add colored points: red if padj<0.05, orange of log2FC>1, green if both)
+    #with(subset(res, adj.p<.05 ), points(logFC, -log10(adj.p), pch=20, col="red", cex=.5))
+    #with(subset(res, abs(logFC)>1), points(logFC, -log10(adj.p), pch=20, col="orange", cex=.5))
+    with(subset(res, adj.p<.01 & abs(logFC)>1), points(logFC, -log10(adj.p), pch=20, col="red",cex=.9))
+    with(subset(res, adj.p<.01 & abs(logFC)>5), textxy(logFC, -log10(adj.p), labs=gene, cex=.6))
+    
+    dev.off()
+    
+  }
+}
+
+
+# Label points with the textxy function from the calibrate plot
+#
+#with(subset(res, adj.p<.05 & abs(logFC)>2), textxy(logFC, -log10(adj.p), labs=gene, cex=.6))
+
+
+
+
+
+
