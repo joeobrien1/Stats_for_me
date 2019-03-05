@@ -1,0 +1,10 @@
+
+
+###how to pull a file and parse the data so that it matches 
+grep -iw -f new_file.txt /Users/josephobrien/Desktop/WT_KO_final_LV/D2WT_D2KO.htseq.edgeR.txtsig.LV.txtfc.lv.txtcpm.lv.txt > second_file.txt
+
+
+### how to pull a particular row from a data set
+grep -i "Sgcg" /Users/josephobrien/Desktop/WT_KO_final_LV/D2WT_D2KO.htseq.edgeR.txtsig.LV.txtfc.lv.txtcpm.lv.txt > second_file.txt
+
+### Use tex-plus, tools-> cleanup-> Mac-> unix
