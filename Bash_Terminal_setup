@@ -1,0 +1,21 @@
+andy:Desktop Kayleigh$ cd Genome_mods/
+andy:Genome_mods Kayleigh$ ls
+ENCFF208CCL_H2K27ac_sig.bigwig	bigWigToBedGraph
+andy:Genome_mods Kayleigh$ chmod +x bigWigToBedGraph 
+andy:Genome_mods Kayleigh$ ./bigWigToBedGraph 
+-bash: ./bigWigToBedGraph: cannot execute binary file
+andy:Genome_mods Kayleigh$ ./bigWigToBedGraph
+-bash: ./bigWigToBedGraph: cannot execute binary file
+andy:Genome_mods Kayleigh$ chmod +x bigWigToBedGraph 
+andy:Genome_mods Kayleigh$ ./bigWigToBedGraph
+bigWigToBedGraph - Convert from bigWig to bedGraph format.
+usage:
+   bigWigToBedGraph in.bigWig out.bedGraph
+options:
+   -chrom=chr1 - if set restrict output to given chromosome
+   -start=N - if set, restrict output to only that over start
+   -end=N - if set, restict output to only that under end
+   -udcDir=/dir/to/cache - place to put cache for remote bigBed/bigWigs
+
+andy:Genome_mods Kayleigh$ ./bigWigToBedGraph ENCFF208CCL_H2K27ac_sig.bigwig ENCFF208CCL_H2K27ac_sig.bedGraph
+#andy:Genome_mods Kayleigh$ ## how to set directory, list files, allow exec of tool, convert bigWig to BedGraph
