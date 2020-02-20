@@ -27,7 +27,14 @@ for (i in seq_len(nrow(top_peaks))) {
     ay = -40
   )
 }
-
+library("lazyeval")
+library(ggplot2)
+install.packages("dplyr") 
+install.packages("plotly")
+install.packages("magrittr")
+library(magrittr) # needs to be run every time you start R and want to use %>%
+library(dplyr)    # alternatively, this also loads %>%
+library(plotly)
 
 p <- plot_ly(data = wt129lvrv, x = wt129lvrv$logFC, y = -log10(wt129lvrv$PValue), mode = "markers", 
   text= wt129lvrv$gene, color = wt129lvrv$group) %>% 
