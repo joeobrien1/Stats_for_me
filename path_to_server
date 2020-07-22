@@ -1,0 +1,45 @@
+Last login: Mon Jul 29 15:00:51 on ttys000
+-bash: /Users/Kayleigh/.bash_profile: line 36: unexpected EOF while looking for matching `''
+-bash: /Users/Kayleigh/.bash_profile: line 49: syntax error: unexpected end of file
+andy:~ Kayleigh$ server
+-bash: server: command not found
+andy:~ Kayleigh$ vim .bash_profile
+andy:~ Kayleigh$ echo $SHELL
+/bin/bash
+andy:~ Kayleigh$ vim .bash_profile
+
+
+
+
+
+
+
+
+
+
+
+
+
+#ALIASES
+alias quest='ssh -t ahv914@quest.it.northwestern.edu "cd /../../projects/b1042/McNallyLab/; bash"'
+alias andyhome="cd /../../projects/b1042/McNallyLab/"'
+alias server='"ssh jgo884@mcnallylabwkstn01.fsm.northwestern.edu"'
+
+#Personal Path Folder
+export PATH=$PATH:/Users/Kayleigh/AndyWGS/PATH
+
+#VCFTOOLS
+export PATH=$PATH:/Users/Kayleigh/AndyWGS/vcftools_0.1.12b/bin
+export PATH=$PATH:/Users/Kayleigh/AndyWGS/snpEff
+export PATH=$PATH:/Users/Kayleigh/AndyWGS/tabix-0.2.6
+export PERL5LIB=/Users/Kayleigh/AndyWGS/vcftools_0.1.12b/perl/
+
+# Setting PATH for Python 3.4
+# The orginal version is saved in .bash_profile.pysave
+PATH="/Library/Frameworks/Python.framework/Versions/3.4/bin:${PATH}"
+
+#HOMER
+export PATH=$PATH:/Users/Kayleigh/AndyWGS/homer.v4.8.3/bin
+
+#SAMTOOLS
+

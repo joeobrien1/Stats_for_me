@@ -7,18 +7,7 @@ This is a temporary script file.
 
 #Read in input file Actual
 
-testlist = dict()
-with open("/Users/Kayleigh/Dropbox/Insight_Data_Engineer/input/actual.txt") as actualfile:
-    for line in actualfile:
-        parts = line.split(|)
-        testlist.append = parts[0]
-        
 
-#Read in input file Prediction
-
-#Read in input file Window
-        
-        
         
 # Subset a bedgraph file
 
@@ -41,4 +30,9 @@ with open('/Users/Kayleigh/Desktop/Genome_mods/ENCFF208CCL_H2K27ac_sig2_chr9.bed
 new_file.close()
 
 print('Completed')
+
+data1 = os.getcwd('/Users/Kayleigh/Desktop/RNAseq_Data/')
+
+
+mydata = pd.read_table('/Users/Kayleigh/Desktop/RNAseq_Data/D2/RV/D2WT_D2KO_RV.htseq.edgeR.txt')
 
